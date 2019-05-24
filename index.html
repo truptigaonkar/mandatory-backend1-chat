@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Realtime chat</title>
+    <style>
+        .inputAddList__placeholder::placeholder{
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,7 +37,18 @@
         // Message form submit function
         $messageForm.submit(function(e){
             e.preventDefault();
-            console.log($messageInput.val())
+            console.log($messageInput.val());
+            
+            //Input validation
+            if($messageInput.val() == ''){
+                //alert('Enter message');
+                $messageInput.addClass("inputAddList__placeholder");
+                $messageInput.attr("placeholder", "You must write something!!!")
+            }else{
+                $messageInput.attr("placeholder", "Enter list title.....")
+                $messageInput.removeClass("inputAddList__placeholder")
+            }
+            $messageInput.val(''); // empty input after submission 
         });
     });
 </script>
