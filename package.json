@@ -1,0 +1,23 @@
+{
+  "name": "mandatory-backend1-chat",
+  "version": "1.0.0",
+  "description": "Real time chat application using node.js, express.js & socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truptigaonkar/mandatory-backend1-chat.git"
+  },
+  "author": "Trupti Gaonkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/truptigaonkar/mandatory-backend1-chat/issues"
+  },
+  "homepage": "https://github.com/truptigaonkar/mandatory-backend1-chat#readme",
+  "dependencies": {
+    "express": "^4.17.0",
+    "socket.io": "^2.2.0"
+  }
+}
