@@ -7,8 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Realtime chat</title>
     <style>
-        .inputAddList__placeholder::placeholder{
+        .messageInput__placeholder::placeholder{
             color: red;
+        }
+        #chatWindow{
+			height:300px;
         }
     </style>
 </head>
@@ -16,11 +19,11 @@
 <body>
     <h1>Socket io chat</h1>
     <div id="container">
-            <div id="chatWindow"></div>
-            <form type="submit" id="messageForm">
-                <input type="text" id="messageInput" placeholder="Type message here.....">
+        <div id="chatWindow"></div>
+        <form type="submit" id="messageForm">
+            <input type="text" id="messageInput" placeholder="Type message here.....">
                 <!-- <input type="submit" value="submit"> -->
-            </form>
+        </form>
     </div>
  
 </body>
@@ -42,13 +45,20 @@
             //Input validation
             if($messageInput.val() == ''){
                 //alert('Enter message');
-                $messageInput.addClass("inputAddList__placeholder");
+                $messageInput.addClass("messageInput__placeholder");
                 $messageInput.attr("placeholder", "You must write something!!!")
+                
             }else{
-                $messageInput.attr("placeholder", "Enter list title.....")
-                $messageInput.removeClass("inputAddList__placeholder")
+                $messageInput.attr("placeholder", "Enter message here.....")
+                $messageInput.removeClass("messageInput__placeholder")
+                socket.emit('send message', $messageInput.val()); // socket send message
             }
             $messageInput.val(''); // empty input after submission 
+        });
+
+        // CLIENT SIDE: 
+        socket.on('new message', function(data){ 
+            $chatWindow.append(data +"<br />"); // Display the message on chatwindow
         });
     });
 </script>
