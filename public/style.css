@@ -1,0 +1,10 @@
+h1{
+    color:blue;
+}
+
+.messageInput__placeholder::placeholder{
+    color: red;
+}
+#chatWindow{
+    height:300px;
+}
