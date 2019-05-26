@@ -24,6 +24,7 @@ $(function(){
     });
 
     // CLIENT SIDE functionality
+    // Receive chat message from server.
     socket.on('new message', function(data){ 
         $chatWindow.append(data +"<br />"); // Display the message on chatwindow
     });
