@@ -13,8 +13,7 @@ $(function(){
         if($messageInput.val() == ''){
             //alert('Enter message');
             $messageInput.addClass("messageInput__placeholder");
-            $messageInput.attr("placeholder", "You must write something!!!")
-            
+            $messageInput.attr("placeholder", "You must write something!!!")  
         }else{
             $messageInput.attr("placeholder", "Enter message here.....")
             $messageInput.removeClass("messageInput__placeholder")
@@ -23,9 +22,8 @@ $(function(){
         $messageInput.val(''); // empty input after submission 
     });
 
-    // CLIENT SIDE functionality
     // Receive chat message from server.
     socket.on('new message', function(data){ 
-        $chatWindow.append(data +"<br />"); // Display the message on chatwindow
+        $chatWindow.append("<strong>" +data.user +" : </strong>" +data.msg +"<br />"); // Display the message on chatwindow
     });
 });
