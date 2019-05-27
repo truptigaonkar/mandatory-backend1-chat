@@ -44,6 +44,8 @@ $(function () {
                 if (data) {
                     $('#usernameWrap').hide();
                     $('#contentWrap').show();
+                } else {
+                    $usernameError.html('The username is already taken! Try again.')
                 }
             });
         }
