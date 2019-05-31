@@ -1,48 +1,51 @@
-const express = require('express');
-const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io').listen(server);
+var express = require('express'),
+	app = express(),
+	server = require('http').createServer(app),
+	io = require('socket.io').listen(server);
+	usernames = [];
 
-server.listen(8000);
-console.log('Server running');
+server.listen(process.env.PORT || 8000);
+console.log('Server Running...');
+
+/* //To add single html file only without public folder
+app.get('/', (req, res) => {
+    //res.send("Home page");
+    res.sendFile(__dirname + '/index.html'); //html file added
+}); */
 
 app.use(express.static("public-client")); // where you can have client related files i.e
 
-// //To add single html file only without public folder
-// app.get('/', (req, res) => {
-//     //res.send("Home page");
-//     res.sendFile(__dirname + '/index.html'); //html file added
-// });
+io.sockets.on('connection', function(socket){
+	console.log('Socket Connected...');
 
+	socket.on('new user', function(data, callback){
+		if(usernames.indexOf(data) != -1){
+			callback(false);
+		} else {
+			callback(true);
+			socket.username = data;
+			usernames.push(socket.username);
+			updateUsernames();
+		}
+	});
 
-//Message form submit function
-io.on('connection', function(socket){
-    console.log('Establish socket connection....');
-    //console.log(socket.id);
+	// Update Usernames
+	function updateUsernames(){
+		io.sockets.emit('usernames', usernames);
+	}
 
-    //message send
-    socket.on('send message', function(data){
-        io.sockets.emit('new message', {msg: data, user:socket.username}); //Sending message to all including me
-        //socket.broadcast.emit('new message', data); // Broadcast message to all except me
-    });
+	// Send Message
+	socket.on('send message', function(data){
+		io.sockets.emit('new message', {msg: data, user:socket.username});
+	});
 
-      //Server disconnect
-      socket.on('disconnect', function(){
-        console.log('Disconnected.....');
-    });
+	// Disconnect
+	socket.on('disconnect', function(data){
+		if(!socket.username){
+			return;
+		}
 
-    // new user
-    usernames = [];
-    socket.on('new user', function(data, callback){
-        if(usernames.indexOf(data) != -1){
-            callback(false);
-        }else{
-            callback(true);
-            socket.username = data;
-            usernames.push(socket.username);
-            console.log(socket.username);
-            io.sockets.emit('nicknames', usernames)
-        }
-    });
+		usernames.splice(usernames.indexOf(socket.username), 1);
+		updateUsernames();
+	});
 });
-

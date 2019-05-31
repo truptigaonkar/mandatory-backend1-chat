@@ -1,18 +1,49 @@
-h1{
-    color:blue;
+#container{
+    width:700px;
+    margin:0 auto;
 }
 
-.messageInput__placeholder::placeholder{
-    color: red;
-}
 #chatWindow{
     height:300px;
 }
-#contentWrap{
-    padding: 1%;
-    width: 15%;
-    height: 50%;
-    border: 1px solid black;
-    background-color: #e7f5fe;
-    display: none;
+
+#mainWrapper{
+    display:none;
+}
+
+#chatWrapper{
+    float:left;
+    border:1px #ccc solid;
+    border-radius: 10px;
+    background:#f4f4f4;
+    padding:10px;
+}
+
+#userWrapper{
+    float:left;
+    border:1px #ccc solid;
+    border-radius: 10px;
+    background:#f4f4f4;
+    padding:10px;
+    margin-left:20px;
+    width:150px;
+    max-height:200px;
+}
+
+#namesWrapper{
+    float:left;
+    border:1px #ccc solid;
+    border-radius: 10px;
+    background:#f4f4f4;
+    padding:10px;
+    margin-left:20px;
+}
+
+input{
+    height:30px;
+    border:solid 1px #ccc;
+}
+
+.messageInput__placeholder{
+    color: red;
 }

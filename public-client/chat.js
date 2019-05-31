@@ -3,7 +3,51 @@ $(function () {
     let $messageForm = $('#messageForm');
     let $messageInput = $('#messageInput');
     let $chatWindow = $('#chatWindow');
+    var $users = $('#users');
 
+    let $usernameForm = $('#usernameForm');
+    let $usernameInput = $('#usernameInput');
+    let $usernameError = $('#usernameError');
+
+    // Username form submit function
+    $usernameForm.submit(function (e) {
+        e.preventDefault();
+        //console.log($usernameInput.val());
+
+        //Input validation
+        if ($usernameInput.val() == '') {
+            //alert('Enter message');
+            $usernameInput.addClass("messageInput__placeholder");
+            $usernameInput.attr("placeholder", "You must write something!!!")
+        } else {
+            $usernameInput.attr("placeholder", "Enter Username again here.....");
+            $usernameInput.removeClass("messageInput__placeholder");
+
+            socket.emit('new user', $usernameInput.val(), function (data) {
+                if (data) {
+                    $('#usernameWrap').hide();
+                    $('#mainWrapper').show();
+                } else {
+                    $usernameError.html('The username is already taken! Try again.')
+                }
+            });
+        }
+        $usernameInput.val('');
+    });
+
+    socket.on('usernames', function(data) {
+        $users.html( data.join("<br/>") ); 
+   });
+
+    // socket.on('usernames', function(data){
+    //     var html = '';
+    //     for(i = 0;i < data.length;i++){
+    //         html += data[i] + '<br>';
+    //     }
+    //     $users.html(html);
+    // });
+
+   
     // Message form submit function
     $messageForm.submit(function (e) {
         e.preventDefault();
@@ -21,37 +65,6 @@ $(function () {
         }
         $messageInput.val(''); // empty input after submission 
     });
-
-    let $usernameForm = $('#usernameForm');
-    let $usernameInput = $('#usernameInput');
-    let $usernameError = $('#usernameError');
-
-    // Username form submit function
-    $usernameForm.submit(function (e) {
-        e.preventDefault();
-        console.log($usernameInput.val());
-
-        //Input validation
-        if ($usernameInput.val() == '') {
-            //alert('Enter message');
-            $usernameInput.addClass("messageInput__placeholder");
-            $usernameInput.attr("placeholder", "You must write something!!!")
-        } else {
-            $usernameInput.attr("placeholder", "Enter Username again here.....");
-            $usernameInput.removeClass("messageInput__placeholder");
-
-            socket.emit('new user', $usernameInput.val(), function (data) {
-                if (data) {
-                    $('#usernameWrap').hide();
-                    $('#contentWrap').show();
-                } else {
-                    $usernameError.html('The username is already taken! Try again.')
-                }
-            });
-        }
-        $usernameInput.val('');
-    });
-
 
     // Receive chat message from server.
     socket.on('new message', function (data) {

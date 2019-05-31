@@ -11,19 +11,25 @@
 
 <body>
     <h1>Socket io chat</h1>
-    <div id="usernameWrap">
-        <div id="usernameError"></div>
-        <form type="submit" id="usernameForm">
-            <input type="text" id="usernameInput" placeholder="Enter Username.....">
-        </form>
+    <div id="container">
+        <div id="usernameWrap">
+            <div id="usernameError"></div>
+            <form type="submit" id="usernameForm">
+                <input type="text" id="usernameInput" placeholder="Enter Username.....">
+            </form>
+        </div>
+        <div id="mainWrapper">
+            <div id="chatWrapper">
+                <div id="chatWindow"></div>
+                <form type="submit" id="messageForm">
+                    <input type="text" id="messageInput" placeholder="Type message here.....">
+                </form>
+            </div>
+            <div id="userWrapper">
+                <div id="users"></div>
+            </div>
+        </div>
     </div>
-    <div id="contentWrap">
-        <div id="chatWindow"></div>
-        <form type="submit" id="messageForm">
-            <input type="text" id="messageInput" placeholder="Type message here.....">
-        </form>
-    </div>
- 
 </body>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
