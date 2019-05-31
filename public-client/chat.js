@@ -70,4 +70,10 @@ $(function () {
     socket.on('new message', function (data) {
         $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + "<br />"); // Display the message on chatwindow
     });
+
+     // listener, whenever the server emits 'updatechat', this updates the chat body
+  socket.on('updatechat', function (username, data) {
+    $('#chatWindow').append('<b>'+username + ':</b> ' + data + '<br>');
+  });
+
 });

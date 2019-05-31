@@ -19,6 +19,13 @@ io.sockets.on('connection', function(socket){
 	console.log('Socket Connected...');
 
 	socket.on('new user', function(data, callback){
+    
+    // Admin message to everyone at the start
+    socket.emit('updatechat', 'Admin', 'Welcome to chat application');
+        
+    //Broadcast msg from Admin to everone except him
+    socket.broadcast.emit('updatechat', 'Admin', 'A new User has connected');
+
 		if(usernames.indexOf(data) != -1){
 			callback(false);
 		} else {
@@ -26,7 +33,7 @@ io.sockets.on('connection', function(socket){
 			socket.username = data;
 			usernames.push(socket.username);
 			updateUsernames();
-		}
+        }
 	});
 
 	// Update Usernames
@@ -44,8 +51,8 @@ io.sockets.on('connection', function(socket){
 		if(!socket.username){
 			return;
 		}
-
 		usernames.splice(usernames.indexOf(socket.username), 1);
-		updateUsernames();
+        updateUsernames();
+        //socket.broadcast.emit('updatechat', 'Admin', 'Disconnected');
 	});
 });
