@@ -19,14 +19,18 @@
             </form>
         </div>
         <div id="mainWrapper">
-            <div id="chatWrapper">
-                <div id="chatWindow"></div>
+            <div id="roomWrapper" style="overflow-y: scroll; height:480px; width: 300px">
+                <strong>Room List</strong><hr>
+                <div id="rooms"></div>
+            </div>
+            <div id="chatWrapper" >
+                <div id="chatWindow" style="overflow-y: scroll; height:450px; width: 600px"></div>
                 <form type="submit" id="messageForm">
                     <input type="text" id="messageInput" placeholder="Type message here.....">
                 </form>
             </div>
-            <div id="userWrapper">
-                    <strong>User List</strong>
+            <div id="userWrapper" style="overflow-y: scroll; height:480px; width: 300px">
+                    <strong>User List</strong><hr>
                 <div id="users"></div>
             </div>
         </div>

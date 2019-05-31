@@ -1,5 +1,5 @@
 #container{
-    width:700px;
+    width:1700px;
     margin:0 auto;
 }
 
@@ -19,6 +19,16 @@
     padding:10px;
 }
 
+#roomWrapper{
+    float:left;
+    border:1px #ccc solid;
+    border-radius: 10px;
+    background:#f4f4f4;
+    padding:10px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
 #userWrapper{
     float:left;
     border:1px #ccc solid;
@@ -26,8 +36,6 @@
     background:#f4f4f4;
     padding:10px;
     margin-left:20px;
-    width:150px;
-    max-height:200px;
 }
 
 #namesWrapper{
