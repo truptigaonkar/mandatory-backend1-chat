@@ -47,10 +47,10 @@
     margin-left:20px;
 }
 
-input{
+/* input{
     height:30px;
     border:solid 1px #ccc;
-}
+} */
 
 .messageInput__placeholder{
     color: red;

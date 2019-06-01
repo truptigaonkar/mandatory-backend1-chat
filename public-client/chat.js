@@ -37,7 +37,7 @@ $(function () {
 
     socket.on('usernames', function(data) {
         $users.html( data.join("<br/>") ); 
-   });
+    });
 
     // socket.on('usernames', function(data){
     //     var html = '';
@@ -58,6 +58,7 @@ $(function () {
             //alert('Enter message');
             $messageInput.addClass("messageInput__placeholder");
             $messageInput.attr("placeholder", "You must write something!!!")
+            //$messageInput.css("color", "red")
         } else {
             $messageInput.attr("placeholder", "Enter message here.....")
             $messageInput.removeClass("messageInput__placeholder")
@@ -75,5 +76,22 @@ $(function () {
   socket.on('updatechat', function (username, data) {
     $('#chatWindow').append('<b>'+username + ':</b> ' + data + '<br>');
   });
+
+  	// listener, whenever the server emits 'updaterooms', this updates the room the client is in
+	socket.on('updaterooms', function(rooms, current_room) {
+		$('#rooms').empty();
+		$.each(rooms, function(key, value) {
+			if(value == current_room){
+				$('#rooms').append('<div>' + value + '</div>');
+			}
+			else {
+				$('#rooms').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
+			}
+		});
+  });
+  
+  function switchRoom(room){
+		socket.emit('switchRoom', room);
+	}
 
 });
