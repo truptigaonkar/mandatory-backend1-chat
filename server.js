@@ -22,9 +22,7 @@ io.sockets.on('connection', function(socket){
 	console.log('Socket Connected...');
 
 	socket.on('new user', function(data, callback, username){ 
-    // Admin message to everyone at the start
-    socket.emit('updatechat', 'Admin', 'Welcome to chat application');
-        
+    
     //Broadcast msg from Admin to everone except him
     socket.broadcast.emit('updatechat', 'Admin', 'A new User has connected');
 
@@ -38,19 +36,19 @@ io.sockets.on('connection', function(socket){
         }
 
         // we store the username in the socket session for this client
-        //socket.username = username;
+        // socket.username = username;
         // store the room name in the socket session for this client
         socket.room = 'room1';
         // add the client's username to the global list
-    usernames[username] = username;
+        usernames[username] = username;
           // send client to room 1
         socket.join('room1');
         
-        socket.emit('updatechat', 'Admin', 'you have connected to room1');
+        // Admin welcome message to everyone at the start with which room to be connected
+        socket.emit('updatechat', 'Admin', 'Welcome to chat application! You have connected to room1');
 		// echo to room 1 that a person has connected to their room
-		socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
+		//socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
 		socket.emit('updaterooms', rooms, 'room1');
-
     });
     
     socket.on('switchRoom', function(newroom){
@@ -75,7 +73,7 @@ io.sockets.on('connection', function(socket){
         io.sockets.emit('new message', {msg: data, user:socket.username});
         
         // we tell the client to execute 'updatechat' with 2 parameters
-		io.sockets.in(socket.room).emit('new message', socket.username, data);
+		//io.sockets.in(socket.room).emit('new message', socket.username, data);
 	});
 
 	// Disconnect
