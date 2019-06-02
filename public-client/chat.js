@@ -3,7 +3,7 @@ $(function () {
     let $messageForm = $('#messageForm');
     let $messageInput = $('#messageInput');
     let $chatWindow = $('#chatWindow');
-    var $users = $('#users');
+    let $users = $('#users');
 
     let $usernameForm = $('#usernameForm');
     let $usernameInput = $('#usernameInput');
@@ -35,12 +35,14 @@ $(function () {
         $usernameInput.val('');
     });
 
+    //Username list
     socket.on('usernames', function(data) {
         $users.html( data.join("<br/>") ); 
     });
 
+    // //Alternate way of listing users
     // socket.on('usernames', function(data){
-    //     var html = '';
+    //     let html = '';
     //     for(i = 0;i < data.length;i++){
     //         html += data[i] + '<br>';
     //     }
@@ -55,7 +57,6 @@ $(function () {
 
         //Input validation
         if ($messageInput.val() == '') {
-            //alert('Enter message');
             $messageInput.addClass("messageInput__placeholder");
             $messageInput.attr("placeholder", "You must write something!!!")
             //$messageInput.css("color", "red")
@@ -85,13 +86,20 @@ $(function () {
 				$('#rooms').append('<div>' + value + '</div>');
 			}
 			else {
-				$('#rooms').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
-			}
-		});
-  });
+                //$('#rooms').append('<div><a href="#" id="btnsave" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
+                
+                // $('#rooms').append('<div><a href="#" id="btnsave">' + value + '</a></div>');
+                // document.getElementById ("btnsave").addEventListener ("click", switchRoom );
+               
+                
+            }
+        
+        });
+        // function switchRoom(room){
+        //     socket.emit('switchRoom', room);
+        // }
+    });
   
-  function switchRoom(room){
-		socket.emit('switchRoom', room);
-	}
+  
 
 });
