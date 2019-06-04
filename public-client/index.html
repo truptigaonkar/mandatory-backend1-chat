@@ -38,6 +38,34 @@
             </div>
         </div>
     </div>
+    <script>
+        // Getting Room list 
+        function getRequest() {
+            let xml = new XMLHttpRequest
+            xml.open("GET", "http://localhost:8000/api/rooms");
+            xml.addEventListener("load", getParse);
+            xml.send();
+        }
+        getRequest(); // Declare function
+
+        function getParse() {
+            let parsedData = JSON.parse(this.responseText);
+            console.log(parsedData);
+            renderText(parsedData);
+        }
+
+        function renderText(parsedData) {
+            let output = ''; 
+            for (let i in parsedData) {
+                output +=   
+                    '<ul>' +
+                        '<li>' + parsedData[i].name + '</li>' +
+                    '</ul>';
+            }
+            document.getElementById('rooms').innerHTML = output;
+        }
+    </script>
+
 </body>
 
 
