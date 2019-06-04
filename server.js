@@ -1,20 +1,77 @@
 let express = require('express');
 let	app = express();
+app.use(express.json());
 let	server = require('http').createServer(app);
 let	io = require('socket.io').listen(server);
 
 server.listen(process.env.PORT || 8000);
-console.log('Server is running on port 8000...');
+console.log('Server is running at http://localhost:8000/');
 
 app.use(express.static("public-client")); //client related files i.e html, js, css
 
 //Usernames
 usernames = [];
 
+/* ---------------------------Rooms api ---------------------------*/
+//Rooms
+const rooms = [
+    { id: 1, name: 'room1'}
+]
+
+//Get all rooms
+app.get('/api/rooms', function(req, res){
+	res.send(rooms);
+});
+
+// GET specific room according to id
+app.get('/api/rooms/:id', (req, res) => {
+    // Look up the room if no exist, return 404
+    const room = rooms.find(c => c.id === parseInt(req.params.id));
+    if(!room) 
+        return res.status(404).send('The room with specific id is not found');
+    // Return the same room
+    res.send(room);
+});
+
+// POST room (Do not forgot using 'app.use(express.json());' up)
+app.post('/api/rooms', (req, res) => {
+    // Validate, if invalid return 400 - Bad request
+    if(!req.body.name || req.body.name.length < 3)
+        return res.status(400).send('Name is required and should be 3 characters long')
+    // room to be added
+    const room = {
+        id: rooms.length + 1,
+        name: req.body.name
+    };
+    // Add the room with push
+    rooms.push(room);
+    // Return the added room
+	res.send(room)	
+});
+
+// DELETE room
+app.delete('/api/rooms/:id', (req, res) => {
+    // Look up the room if no exist, return 404
+    const room = rooms.find(c => c.id === parseInt(req.params.id));
+    if(!room)
+        return res.status(404).send('The room with specific id is not found');
+    // Delete
+    const index = rooms.indexOf(room);
+    rooms.splice(index, 1);
+    // Return the deleted room
+	res.send(room);
+});
+
+/* ------------------------End Rooms api ---------------------------*/
+
 io.sockets.on('connection', function (socket) {
 	console.log('Socket Connected...');
 
 	socket.on('new user', function (data, callback, username) {
+
+		//Broadcast msg from Admin to everone except him
+		socket.broadcast.emit('updatechat', 'Admin', 'A new User has CONNECTED!');
+
 		if (usernames.indexOf(data) != -1) {
 			callback(false);
 		} else {
@@ -24,17 +81,11 @@ io.sockets.on('connection', function (socket) {
 			updateUsernames();
 		}
 
-		// Admin welcome message to everyone at the start with which room to be connected
-		socket.emit('updatechat', 'Admin', 'Welcome to chat application!');
-		//Broadcast msg from Admin to everone except him
-		socket.broadcast.emit('updatechat', 'Admin', 'A new User has CONNECTED!');
+		// Admin welcome message to everyone at the start
+		socket.emit('updatechat', 'Admin', 'Welcome to chat application! ');
+	
 	});
 
-	socket.on('switchRoom', function (newroom) {
-		socket.leave(socket.room);
-		socket.join(newroom);
-		socket.emit('updatechat', 'SERVER', 'you have connected to ' + newroom);
-	});
 
 	// Update Usernames
 	function updateUsernames() {
