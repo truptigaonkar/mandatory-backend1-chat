@@ -82,12 +82,11 @@ $(function () {
             data: JSON.stringify({
                 name: roomInput.val()
             }),
-            success: function (response) {
+            success: function (data, response) {
                 console.log(response);
                 roomInput.val('');
-                //$("#rooms").append(output);
-                
-                
+                // $("#rooms").append("<li><a data-toggle='tab' href=#" + data.name + ">" + data.name + "</a></li>");
+                $("#rooms").append("<li>" + data.name + "</li>");      
             }
         });
     });
