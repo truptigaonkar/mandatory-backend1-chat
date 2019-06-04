@@ -23,7 +23,10 @@
         </div>
         <div id="mainWrapper">
             <div id="roomWrapper" style="overflow-y: scroll; height:480px; width: 200px">
-                <strong>Room List</strong><hr>
+                <strong>Rooms</strong><hr>
+                <form action="" type="submit" id="createRoomForm">
+                    <input type="text" id="roomInput" placeholder="Create new room">
+                </form>
                 <div id="rooms"></div>
             </div>
             <div id="chatWrapper" >
@@ -33,7 +36,7 @@
                 </form>
             </div>
             <div id="userWrapper" style="overflow-y: scroll; height:480px; width: 200px">
-                <strong>User List</strong><hr>
+                <strong>Users</strong><hr>
                 <div id="users"></div>
             </div>
         </div>
@@ -50,7 +53,7 @@
 
         function getParse() {
             let parsedData = JSON.parse(this.responseText);
-            console.log(parsedData);
+            //console.log(parsedData);
             renderText(parsedData);
         }
 
@@ -64,6 +67,51 @@
             }
             document.getElementById('rooms').innerHTML = output;
         }
+
+$(function () {
+    $('#createRoomForm').submit(function (e) {
+        e.preventDefault();
+        console.log($('#roomInput').val());
+        let roomInput = $('#roomInput');
+        
+
+        $.ajax({
+            url: 'http://localhost:8000/api/rooms',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: roomInput.val()
+            }),
+            success: function (response) {
+                console.log(response);
+                roomInput.val('');
+                //$("#rooms").append(output);
+                
+                
+            }
+        });
+    });
+});
+    //         // CREATE/POST
+    // let createRoomForm = document.querySelector("#createRoomForm")
+    // let roomInput = document.querySelector('#roomInput');
+
+
+    // createRoomForm.addEventListener('click', formCreate);
+    // function formCreate(e){
+    //     e.preventDefault();
+    //     console.log(roomInput.value);
+    //     // let xml = new XMLHttpRequest
+    //     // xml.open("POST", "http://localhost:8000/api/rooms", true);
+    //     // xml.setRequestHeader('Content-type','text/plain');
+    //     // xml.onload = function(){
+    //     //     let parsedData = JSON.parse(xml.responseText);
+    //     //     if(xml.readyState==4 && xml.status==201){
+    //     //         document.getElementById('rooms').innerHTML=JSON.parse(xml.responseText);
+    //     //     };
+    //     // }
+    //     // xml.send(JSON.stringify(roomInput.value));  
+    // }
     </script>
 
 </body>
