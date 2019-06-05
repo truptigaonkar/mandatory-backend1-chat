@@ -64,9 +64,7 @@
             for (let i in parsedData) {
                 output +=
                     '<ul>' +
-                    '<li class="id">' + parsedData[i].id + '</li>' +
-                    '<li>' + parsedData[i].name + '</li>' +
-                    '<li>' + '<button class="btnDelete">' + 'delete' + '</button>' + '</li>' +
+                        '<li class="id">' + parsedData[i].id +' '+ parsedData[i].name +' '+ '<button class="btnDelete">' + 'delete' + '</button>' + '</li>' +
                     '</ul>';
             }
             document.getElementById('rooms').innerHTML = output;
@@ -89,7 +87,7 @@
                     success: function (data, response) {
                         console.log(response);
                         roomInput.val('');
-                        $("#rooms").append("<li>" + data.name + "</li>");
+                        $("#rooms").append('<li class="id">' +data.id+ ' ' +data.name+ ' '+ '<button class="btnDelete">' + 'delete' + '</button>' + '</li>');
                     }
                 });
             });
@@ -105,7 +103,7 @@
                     contentType: 'application/json',
                     success: function (response) {
                         console.log(response);
-                        $("#rooms").find(response.name + "</li>").remove();
+                        //$("#rooms").find(response.name + "</li>").remove();
                        
                     }
                 });

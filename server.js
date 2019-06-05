@@ -42,8 +42,8 @@ app.get('/api/rooms/:id', (req, res) => {
 // POST room (Do not forgot using 'app.use(express.json());' up)
 app.post('/api/rooms', (req, res) => {
     // Validate, if invalid return 400 - Bad request
-    if(!req.body.name || req.body.name.length < 3)
-        return res.status(400).send('Name is required and should be 3 characters long')
+    if(!req.body.name)
+        return res.status(400).send('Name is required')
     // room to be added
     const room = {
         id: rooms.length + 1,
