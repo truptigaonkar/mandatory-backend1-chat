@@ -36,20 +36,10 @@ $(function () {
     });
 
     //Username list
-    socket.on('usernames', function(data) {
-        $users.html( data.join("<p>") ); 
+    socket.on('usernames', function (data) {
+        $users.html(data.join("<p>"));
     });
 
-    // //Alternate way of listing users
-    // socket.on('usernames', function(data){
-    //     let html = '';
-    //     for(i = 0;i < data.length;i++){
-    //         html += data[i] + '<br>';
-    //     }
-    //     $users.html(html);
-    // });
-
-   
     // Message form submit function
     $messageForm.submit(function (e) {
         e.preventDefault();
@@ -73,8 +63,9 @@ $(function () {
         $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + "<br />"); // Display the message on chatwindow
     });
 
-     // listener, whenever the server emits 'updatechat', this updates the chat body
-  socket.on('updatechat', function (username, data) {
-    $('#chatWindow').append('<b>'+username + ':</b> ' + data + '<br>');
-  });
+    // listener, whenever the server emits 'updatechat', this updates the chat body
+    socket.on('updatechat', function (username, data) {
+        $('#chatWindow').append('<b>' + username + ':</b> ' + data + '<br>');
+    });
+
 });

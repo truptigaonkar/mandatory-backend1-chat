@@ -11,7 +11,7 @@ let server = require('http').createServer(app);
 let io = require('socket.io').listen(server);
 
 server.listen(process.env.PORT || 8000);
-console.log('Server is running on port 8000...');
+console.log('Server is running at http://localhost:8000/');
 
 app.use(express.static("public-client")); //client related files i.e html, js, css
 
@@ -87,7 +87,7 @@ app.delete('/api/rooms/:id', (req, res) => {
 /* ------------------------End Rooms api ---------------------------*/
 
 io.sockets.on('connection', function (socket) {
-    console.log('Socket Connected...');
+    console.log('Socket Connected at: ' + socket.id);
 
     socket.on('new user', function (data, callback, username) {
 
@@ -104,7 +104,7 @@ io.sockets.on('connection', function (socket) {
         }
 
         // Admin welcome message to everyone at the start
-        socket.emit('updatechat', 'Admin', 'Welcome to chat application! ');
+        socket.emit('updatechat', 'Admin', 'Welcome to chat application at ROOM1! ');
     
     });
 
