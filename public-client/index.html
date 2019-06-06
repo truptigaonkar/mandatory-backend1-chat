@@ -16,7 +16,7 @@
 <body>
     <div id="container">
         <div id="usernameWrap">
-            <div id="cardUser" class="card mb-3 col-sm-3">
+            <div id="cardUser" class="card mb-3 col-sm-3 card border-info mb-3">
                 <img src="image1.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -30,25 +30,43 @@
             </div>
         </div>
         <div id="mainWrapper">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Live Chat - Online</a>
+            </nav>
             <div class="card" id="roomWrapper">
-                <div class="card-header">Rooms</div>
-                <div class="card-body" style="overflow-y: scroll; height:480px;">
+                <div class="card-header" style="text-align: center; font-weight: bold">
+                    Rooms
                     <form action="" type="submit" id="createRoomForm">
-                        <input type="text" id="roomInput" placeholder="Create new room">
+                        <input type="text" class="form-control form-control-sm" id="roomInput"
+                            placeholder="Create new room">
                     </form>
+                </div>
+                <div class="card-body" style="overflow-y: scroll; ">
+
                     <div id="rooms"></div>
                 </div>
             </div>
-            <div id="chatWrapper">
-                <div id="chatWindow" style="overflow-y: scroll; height:450px; width: 800px"></div>
-                <form type="submit" id="messageForm">
-                    <input type="text" id="messageInput" placeholder="Type message here.....">
-                </form>
+            <div id="chatWrapper" class="card border-info mb-3">
+                <div class="card-header" style="text-align: center; font-weight: bold">Chat Window</div>
+                <div class="card-body text-info" id="chatWindow" style="overflow-y: scroll; ">
+
+                </div>
+                <div class="card-footer">
+                    <form type="submit" id="messageForm">
+                        <div class="form-row">
+                            <div class="col-12">
+                                <input type="text" class="form-control" id="messageInput"
+                                    placeholder="Type message here.....">
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
             </div>
-        
+
             <div class="card" id="userWrapper">
-                <div class="card-header">Users</div>
-                <div class="card-body" style="overflow-y: scroll; height:480px;">
+                <div class="card-header" style="text-align: center; font-weight: bold">Users</div>
+                <div class="card-body" style="overflow-y: scroll; ">
 
                     <div id="users"></div>
                 </div>
@@ -75,8 +93,8 @@
             let output = '';
             for (let i in parsedData) {
                 output +=
-                    '<ul>' +
-                    '<li class="id">' + parsedData[i].id + ' ' + parsedData[i].name + ' ' +
+                    '<ul class="list-group">' +
+                    '<li class="id list-group-item">' + parsedData[i].id + ' ' + parsedData[i].name + ' ' +
                     '<button class="btnDelete">' + 'X' + '</button>' + '</li>' +
                     '</ul>';
             }

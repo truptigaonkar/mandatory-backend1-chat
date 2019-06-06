@@ -1,3 +1,8 @@
+body{
+    background-image: url("gradient_bg.png");
+  background-repeat: repeat-x;
+}
+
 #container{
     width:1700px;
     margin:0 auto;
@@ -13,22 +18,23 @@
 
 #chatWrapper{
     float:left;
-    border:1px #ccc solid;
-    border-radius: 10px;
-    background:#f4f4f4;
-    padding:10px;
+    margin:20px;
+    width: 750px;
+    height: 500px;
 }
 
 #roomWrapper{
     float:left;
     margin: 20px;
     width: 240px;
+    height: 500px;
 }
 
 #userWrapper{
     float:left;
     margin:20px;
     width: 240px;
+    height: 500px;
 }
 
 #namesWrapper{
@@ -61,4 +67,8 @@
     font-size: 0.9rem;
     margin-top: 5px;
     text-align: center;
+}
+
+li{
+    list-style: none;
 }
