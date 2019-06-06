@@ -21,20 +21,14 @@
 
 #roomWrapper{
     float:left;
-    border:1px #ccc solid;
-    border-radius: 10px;
-    background:#f4f4f4;
-    padding:10px;
-    margin-right: 20px;
+    margin: 20px;
+    width: 240px;
 }
 
 #userWrapper{
     float:left;
-    border:1px #ccc solid;
-    border-radius: 10px;
-    background:#f4f4f4;
-    padding:10px;
-    margin-left:20px;
+    margin:20px;
+    width: 240px;
 }
 
 #namesWrapper{

@@ -30,13 +30,14 @@
             </div>
         </div>
         <div id="mainWrapper">
-            <div id="roomWrapper" style="overflow-y: scroll; height:480px; width: 200px">
-                <strong>Rooms</strong>
-                <hr>
-                <form action="" type="submit" id="createRoomForm">
-                    <input type="text" id="roomInput" placeholder="Create new room">
-                </form>
-                <div id="rooms"></div>
+            <div class="card" id="roomWrapper">
+                <div class="card-header">Rooms</div>
+                <div class="card-body" style="overflow-y: scroll; height:480px;">
+                    <form action="" type="submit" id="createRoomForm">
+                        <input type="text" id="roomInput" placeholder="Create new room">
+                    </form>
+                    <div id="rooms"></div>
+                </div>
             </div>
             <div id="chatWrapper">
                 <div id="chatWindow" style="overflow-y: scroll; height:450px; width: 800px"></div>
@@ -44,10 +45,13 @@
                     <input type="text" id="messageInput" placeholder="Type message here.....">
                 </form>
             </div>
-            <div id="userWrapper" style="overflow-y: scroll; height:480px; width: 200px">
-                <strong>Users</strong>
-                <hr>
-                <div id="users"></div>
+        
+            <div class="card" id="userWrapper">
+                <div class="card-header">Users</div>
+                <div class="card-body" style="overflow-y: scroll; height:480px;">
+
+                    <div id="users"></div>
+                </div>
             </div>
         </div>
     </div>
