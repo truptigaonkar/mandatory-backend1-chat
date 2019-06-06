@@ -28,7 +28,7 @@ $(function () {
                     $('#usernameWrap').hide();
                     $('#mainWrapper').show();
                 } else {
-                    $usernameError.html('The username is already taken! Try again.')
+                    $usernameError.html('Username is already taken! Try again.')
                 }
             });
         }

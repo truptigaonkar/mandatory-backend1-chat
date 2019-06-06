@@ -54,3 +54,17 @@
 .messageInput__placeholder{
     color: red;
 }
+
+#cardUser {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+#usernameError{
+    color:red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-align: center;
+}
