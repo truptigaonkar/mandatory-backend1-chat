@@ -36,8 +36,17 @@ $(function () {
     });
 
     //Username list
-    socket.on('usernames', function (data) {
-        $users.html(data.join("<p>"));
+    // socket.on('usernames', function (data) {
+    //     $users.html(data.join("<p>"));
+    // });
+
+    // //Alternate way of listing users
+    socket.on('usernames', function(data){
+        let html = '';
+        for(i = 0;i < data.length;i++){
+            html += data[i] + '<hr>';
+        }
+        $users.html(html);
     });
 
     // Message form submit function

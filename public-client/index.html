@@ -16,13 +16,18 @@
 <body>
     <div id="container">
         <div id="usernameWrap">
-            <div id="cardUser" class="card mb-3 col-sm-3 card border-info mb-3">
+            <div id="cardUser" class="card mb-3 col-sm-3">
                 <img src="image1.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">
                         <form type="submit" id="usernameForm">
-                            <input class="form-control form-control-lg" type="text" id="usernameInput"
-                                placeholder="Enter Username">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="usernameInput" class="form-control" placeholder="Enter Username"
+                                    aria-label="EmterUsername" aria-describedby="basic-addon1">
+                            </div>
                         </form>
                         <div id="usernameError"></div>
                     </h5>
@@ -31,9 +36,11 @@
         </div>
         <div id="mainWrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Live Chat - Online</a>
+                <a class="navbar-brand" href="#"><div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> Real Time Chat</a>
             </nav>
-            <div class="card" id="roomWrapper">
+            <div class="card" id="roomWrapper" class="card border-info mb-3">
                 <div class="card-header" style="text-align: center; font-weight: bold">
                     Rooms
                     <form action="" type="submit" id="createRoomForm">
@@ -42,14 +49,12 @@
                     </form>
                 </div>
                 <div class="card-body" style="overflow-y: scroll; ">
-
                     <div id="rooms"></div>
                 </div>
             </div>
             <div id="chatWrapper" class="card border-info mb-3">
                 <div class="card-header" style="text-align: center; font-weight: bold">Chat Window</div>
                 <div class="card-body text-info" id="chatWindow" style="overflow-y: scroll; ">
-
                 </div>
                 <div class="card-footer">
                     <form type="submit" id="messageForm">
@@ -58,7 +63,6 @@
                                 <input type="text" class="form-control" id="messageInput"
                                     placeholder="Type message here.....">
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -67,12 +71,12 @@
             <div class="card" id="userWrapper">
                 <div class="card-header" style="text-align: center; font-weight: bold">Users</div>
                 <div class="card-body" style="overflow-y: scroll; ">
-
                     <div id="users"></div>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         //GET - Listing rooms
         function getRequest() {
@@ -143,8 +147,10 @@
                     success: function (data, response) {
                         console.log(response);
                         roomInput.val('');
-                        $("#rooms").append('<li class="id">' + data.id + ' ' + data.name +
-                            ' ' + '<button class="btnDelete">' + 'X' + '</button>' +
+                        $("#rooms").append('<li class="id list-group-item">' + data.id +
+                            ' ' + data.name +
+                            ' ' + '<button class="btnDelete btn btn-warning">' + 'X' +
+                            '</button>' +
                             '</li>');
                         //$("#rooms").html($(data).append(data));
                     }
@@ -166,6 +172,7 @@
                     }
                 });
             });
+
 
         });
     </script>
