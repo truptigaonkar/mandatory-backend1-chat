@@ -99,7 +99,7 @@
                 output +=
                     '<ul class="list-group">' +
                     '<li class="id list-group-item">' + parsedData[i].id + ' ' + parsedData[i].name + ' ' +
-                    '<button class="btnDelete">' + 'X' + '</button>' + '</li>' +
+                    '<button class="btnDelete btn btn-danger">' + 'X' + '</button>' + '</li>' +
                     '</ul>';
             }
             document.getElementById('rooms').innerHTML = output;
@@ -147,11 +147,12 @@
                     success: function (data, response) {
                         console.log(response);
                         roomInput.val('');
-                        $("#rooms").append('<li class="id list-group-item">' + data.id +
+                        $("#rooms").append('<ul class="list-group">' +'<li class="id list-group-item">' + data.id +
                             ' ' + data.name +
-                            ' ' + '<button class="btnDelete btn btn-warning">' + 'X' +
+                            ' ' + '<button class="btnDelete btn btn-danger">' + 'X' +
                             '</button>' +
-                            '</li>');
+                            '</li>')+
+                    '</ul>';
                         //$("#rooms").html($(data).append(data));
                     }
                 });
@@ -168,7 +169,8 @@
                     contentType: 'application/json',
                     success: function (response) {
                         console.log(response);
-                        //$("#rooms").find('li').last().remove();
+                        $("#rooms").find('<li class="id list-group-item">').remove();
+                        //window.location.replace('http://localhost:8000/');
                     }
                 });
             });
