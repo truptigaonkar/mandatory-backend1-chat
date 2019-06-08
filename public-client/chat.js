@@ -69,7 +69,7 @@ $(function () {
 
     // Receive chat message from server.
     socket.on('new message', function (data) {
-        $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + " - " + data.room + "<br />"); // Display the message on chatwindow
+        $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + "<br />"); // Display the message on chatwindow
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body

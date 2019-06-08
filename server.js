@@ -135,7 +135,7 @@ io.sockets.on('connection', function (socket) {
 
     // Send Message
     socket.on('send message', function (data) {
-        io.sockets.emit('new message', { msg: data, user: socket.username, room:socket.room });
+        io.sockets.in(socket.room).emit('new message', { msg: data, user: socket.username });
     });
 
     // DisconnectA new User has connected
