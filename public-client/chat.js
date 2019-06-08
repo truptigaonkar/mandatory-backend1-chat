@@ -40,7 +40,7 @@ $(function () {
     //     $users.html(data.join("<p>"));
     // });
 
-    // //Alternate way of listing users
+    //Alternate way of listing users
     socket.on('usernames', function(data){
         let html = '';
         for(i = 0;i < data.length;i++){
@@ -76,5 +76,22 @@ $(function () {
     socket.on('updatechat', function (username, data) {
         $('#chatWindow').append('<b>' + username + ':</b> ' + data + '<br>');
     });
+
+//     // listener, whenever the server emits 'updaterooms', this updates the room the client is in
+// 	socket.on('updaterooms', function(rooms, current_room) {
+// 		$('#rooms').empty();
+// 		$.each(rooms, function(key, value) {
+// 			if(value == current_room){
+// 				$('#rooms').append('<div>' + value + '</div>');
+// 			}
+// 			else {
+// 				$('#rooms').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
+// 			}
+// 		});
+//   });
+  
+//   function switchRoom(room){
+// 		socket.emit('switchRoom', room);
+// 	}
 
 });

@@ -1,46 +1,46 @@
-*{
-    font-family: 'ZCOOL KuaiLe', cursive;  */
-  }
-  
-  body {
-    padding: 0;
-    margin: 0; 
-    height: 100%;
-  }
+* {
+    font-family: 'ZCOOL KuaiLe', cursive;
+}
 
-#container{
-    width:1700px;
-    margin:0 auto;
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+#container {
+    width: 1700px;
+    margin: 0 auto;
     height: auto;
 }
 
-#chatWindow{
-    height:300px;
+#chatWindow {
+    height: 300px;
 }
 
-#mainWrapper{
-    display:none;
+#mainWrapper {
+    display: none;
 }
 
-#chatWrapper{
-    float:left;
+#chatWrapper {
+    float: left;
     width: 800px;
     height: 550px;
 }
 
-#roomWrapper{
-    float:left;
+#roomWrapper {
+    float: left;
     width: 240px;
     height: 550px;
 }
 
-#userWrapper{
-    float:left;
+#userWrapper {
+    float: left;
     width: 240px;
     height: 550px;
 }
 
-.messageInput__placeholder{
+.messageInput__placeholder {
     color: red;
 }
 
@@ -49,21 +49,24 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-#usernameError{
-    color:red;
+#usernameError {
+    color: red;
     font-size: 0.9rem;
     margin-top: 5px;
     text-align: center;
 }
 
-li{
+li {
     list-style: none;
 }
 
 /* just make scrollbar invisible */
 ::-webkit-scrollbar {
-    width: 0px; 
-    }
+    width: 0px;
+}
 
+button{
+    padding: 1px;
+}

@@ -36,9 +36,11 @@
         </div>
         <div id="mainWrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#"><div class="spinner-grow text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div> Real Time Chat</a>
+                <a class="navbar-brand" href="#">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div> Real Time Chat
+                </a>
             </nav>
             <div class="card" id="roomWrapper" class="card border-info mb-3">
                 <div class="card-header" style="text-align: center; font-weight: bold">
@@ -94,12 +96,16 @@
         }
 
         function renderText(parsedData) {
-            let output = '';
+            //let output = '';
+            let output =  '<ul class="list-group">' +
+                    '<li class="id list-group-item" style="pointer-events:none; opacity:0.6;" disabled>' + "0" + ' ' + "room1" + ' ' +
+                    '<button class="btn btn-danger btn-xs">' + 'X' + '</button>' + '</li>' +
+                    '</ul>';
             for (let i in parsedData) {
                 output +=
                     '<ul class="list-group">' +
-                    '<li class="id list-group-item">' + parsedData[i].id + ' ' + parsedData[i].name + ' ' +
-                    '<button class="btnDelete btn btn-danger">' + 'X' + '</button>' + '</li>' +
+                    '<li class="id list-group-item">' + parsedData[i].id + ' ' + '<a href="http://localhost:8000/api/rooms/">' + parsedData[i].name + '</a>'  + ' ' +
+                    '<button class="btnDelete btn btn-danger btn-xs">' + 'X' + '</button>' + '</li>' +
                     '</ul>';
             }
             document.getElementById('rooms').innerHTML = output;
@@ -147,13 +153,16 @@
                     success: function (data, response) {
                         console.log(response);
                         roomInput.val('');
-                        $("#rooms").append('<ul class="list-group">' +'<li class="id list-group-item">' + data.id +
-                            ' ' + data.name +
-                            ' ' + '<button class="btnDelete btn btn-danger">' + 'X' +
-                            '</button>' +
-                            '</li>')+
-                    '</ul>';
-                        //$("#rooms").html($(data).append(data));
+                        //if (!(roomInput.val() in $('#rooms'))){
+                        $("#rooms").append('<ul class="list-group">' +
+                                '<li class="id list-group-item">' + data.id +
+                                ' ' + data.name +
+                                ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
+                                'X' +
+                                '</button>' +
+                                '</li>') +
+                            '</ul>';
+                                //}
                     }
                 });
             });
@@ -169,10 +178,13 @@
                     contentType: 'application/json',
                     success: function (response) {
                         console.log(response);
-                        $("#rooms").find('<li class="id list-group-item">').remove();
-                        //window.location.replace('http://localhost:8000/');
+                        //$("#rooms").find('<li class="id list-group-item">').remove();
+                        //window.location.replace('/')
+                        //$("#rooms").find("ul li").remove();
+                        //$("#rooms").find('li .id list-group-item').remove();
                     }
                 });
+                window.location.replace('/')
             });
 
 

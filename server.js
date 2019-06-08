@@ -103,10 +103,29 @@ io.sockets.on('connection', function (socket) {
             updateUsernames();
         }
 
+        //Connected to room1
+        socket.room = 'room1';
+        //socket.room = rooms;
+        socket.join('room1');
+
         // Admin welcome message to everyone at the start
-        socket.emit('updatechat', 'Admin', 'Welcome to chat application at ROOM1! ');
+        socket.emit('updatechat', 'Admin', 'Welcome to chat application! You have connected to ' +socket.room);
+      
+		socket.emit('updaterooms', rooms, 'room1');
     
     });
+
+    // socket.on('switchRoom', function(newroom){
+	// 	socket.leave(socket.room);
+	// 	socket.join(newroom);
+	// 	socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
+	// 	// sent message to OLD room
+	// 	socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+	// 	// update socket session room title
+	// 	socket.room = newroom;
+	// 	socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+	// 	socket.emit('updaterooms', rooms, newroom);
+	// });
 
     // Update Usernames
     function updateUsernames() {
