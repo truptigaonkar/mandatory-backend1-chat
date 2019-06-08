@@ -103,30 +103,28 @@ io.sockets.on('connection', function (socket) {
             updateUsernames();
         }
 
-        //Connected to room1
-        //socket.room = 'room1';
+        //socket.username = username;
 
-        socket.room = rooms[0].name;
+        socket.room = rooms[0].name; //Connect to default First room
         console.log('socket room: ', socket.room);
-        //socket.room = rooms;
-        socket.join('room1');
+        socket.join(socket.room);
 
         // Admin welcome message to everyone at the start
-        socket.emit('updatechat', 'Admin', 'Welcome to chat application! You have connected to ' +socket.room);
+        socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' +socket.room);
       
-		socket.emit('updaterooms', rooms, 'room1');
+		socket.emit('updaterooms', rooms, socket.room);
     
     });
 
     socket.on('switchRoom', function(newroom){
 		socket.leave(socket.room);
 		socket.join(newroom);
-		socket.emit('updatechat', 'SERVER', 'you have connected to ' +newroom);
+		socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' +newroom);
 		// sent message to OLD room
-		socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+		socket.broadcast.to(socket.room).emit('updatechat', 'Admin', socket.username+' has left this room');
 		// update socket session room title
 		socket.room = newroom;
-		socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+		socket.broadcast.to(newroom).emit('updatechat', 'Admin', socket.username+' has joined this room');
 		socket.emit('updaterooms', rooms, newroom);
 	});
 

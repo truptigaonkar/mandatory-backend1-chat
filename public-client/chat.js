@@ -1,4 +1,3 @@
-$(function () {
     let socket = io.connect();
     let $messageForm = $('#messageForm');
     let $messageInput = $('#messageInput');
@@ -9,6 +8,7 @@ $(function () {
     let $usernameInput = $('#usernameInput');
     let $usernameError = $('#usernameError');
 
+$(function () {
     // Username form submit function
     $usernameForm.submit(function (e) {
         e.preventDefault();
@@ -85,13 +85,12 @@ $(function () {
                 $('#rooms').append('<div>' + value.name + '</div>');
             }
             else {
-                $('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.name + '</a></div>');
+                $('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.name + '</a></div>');    
             }
         });
     });
-
-    function switchRoom(room) {
-        socket.emit('switchRoom', room);
-    }
-
 });
+
+function switchRoom(room) {
+    socket.emit('switchRoom', room);
+}
