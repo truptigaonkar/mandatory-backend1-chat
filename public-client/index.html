@@ -96,15 +96,17 @@
         }
 
         function renderText(parsedData) {
-            //let output = '';
-            let output =  '<ul class="list-group">' +
-                    '<li class="id list-group-item" style="pointer-events:none; opacity:0.6;" disabled>' + "0" + ' ' + "room1" + ' ' +
-                    '<button class="btn btn-danger btn-xs">' + 'X' + '</button>' + '</li>' +
-                    '</ul>';
+            let output = '';
+            // let output = '<ul class="list-group">' +
+            //     '<li class="id list-group-item" style="pointer-events:none; opacity:0.6;" disabled>' + "0" + ' ' +
+            //     "room1" + ' ' +
+            //     '<button class="btn btn-danger btn-xs">' + 'X' + '</button>' + '</li>' +
+            //     '</ul>';
             for (let i in parsedData) {
                 output +=
                     '<ul class="list-group">' +
-                    '<li class="id list-group-item">' + parsedData[i].id + ' ' + '<a href="http://localhost:8000/api/rooms/">' + parsedData[i].name + '</a>'  + ' ' +
+                    '<li class="id list-group-item">' + parsedData[i].id + ' ' +
+                    '<a href="http://localhost:8000/api/rooms/">' + parsedData[i].name + '</a>' + ' ' +
                     '<button class="btnDelete btn btn-danger btn-xs">' + 'X' + '</button>' + '</li>' +
                     '</ul>';
             }
@@ -162,8 +164,9 @@
                                 '</button>' +
                                 '</li>') +
                             '</ul>';
-                                //}
-                    }
+                        //}
+                    },
+
                 });
             });
 

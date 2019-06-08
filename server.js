@@ -104,7 +104,10 @@ io.sockets.on('connection', function (socket) {
         }
 
         //Connected to room1
-        socket.room = 'room1';
+        //socket.room = 'room1';
+
+        socket.room = rooms[0].name;
+        console.log('socket room: ', socket.room);
         //socket.room = rooms;
         socket.join('room1');
 
@@ -115,17 +118,17 @@ io.sockets.on('connection', function (socket) {
     
     });
 
-    // socket.on('switchRoom', function(newroom){
-	// 	socket.leave(socket.room);
-	// 	socket.join(newroom);
-	// 	socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
-	// 	// sent message to OLD room
-	// 	socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
-	// 	// update socket session room title
-	// 	socket.room = newroom;
-	// 	socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
-	// 	socket.emit('updaterooms', rooms, newroom);
-	// });
+    socket.on('switchRoom', function(newroom){
+		socket.leave(socket.room);
+		socket.join(newroom);
+		socket.emit('updatechat', 'SERVER', 'you have connected to ' +newroom);
+		// sent message to OLD room
+		socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+		// update socket session room title
+		socket.room = newroom;
+		socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+		socket.emit('updaterooms', rooms, newroom);
+	});
 
     // Update Usernames
     function updateUsernames() {
@@ -134,7 +137,7 @@ io.sockets.on('connection', function (socket) {
 
     // Send Message
     socket.on('send message', function (data) {
-        io.sockets.emit('new message', { msg: data, user: socket.username });
+        io.sockets.emit('new message', { msg: data, user: socket.username, room:socket.room });
     });
 
     // DisconnectA new User has connected

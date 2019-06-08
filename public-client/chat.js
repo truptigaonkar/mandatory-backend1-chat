@@ -41,9 +41,9 @@ $(function () {
     // });
 
     //Alternate way of listing users
-    socket.on('usernames', function(data){
+    socket.on('usernames', function (data) {
         let html = '';
-        for(i = 0;i < data.length;i++){
+        for (i = 0; i < data.length; i++) {
             html += data[i] + '<hr>';
         }
         $users.html(html);
@@ -69,7 +69,7 @@ $(function () {
 
     // Receive chat message from server.
     socket.on('new message', function (data) {
-        $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + "<br />"); // Display the message on chatwindow
+        $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + " - " + data.room + "<br />"); // Display the message on chatwindow
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -77,21 +77,21 @@ $(function () {
         $('#chatWindow').append('<b>' + username + ':</b> ' + data + '<br>');
     });
 
-//     // listener, whenever the server emits 'updaterooms', this updates the room the client is in
-// 	socket.on('updaterooms', function(rooms, current_room) {
-// 		$('#rooms').empty();
-// 		$.each(rooms, function(key, value) {
-// 			if(value == current_room){
-// 				$('#rooms').append('<div>' + value + '</div>');
-// 			}
-// 			else {
-// 				$('#rooms').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
-// 			}
-// 		});
-//   });
-  
-//   function switchRoom(room){
-// 		socket.emit('switchRoom', room);
-// 	}
+    // listener, whenever the server emits 'updaterooms', this updates the room the client is in
+    socket.on('updaterooms', function (rooms, current_room) {
+        $('#rooms').empty();
+        $.each(rooms, function (key, value) {
+            if (value == current_room) {
+                $('#rooms').append('<div>' + value.name + '</div>');
+            }
+            else {
+                $('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.name + '</a></div>');
+            }
+        });
+    });
+
+    function switchRoom(room) {
+        socket.emit('switchRoom', room);
+    }
 
 });
