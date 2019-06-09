@@ -41,6 +41,13 @@ app.get('/api/rooms/:id', (req, res) => {
 
 // POST room (Do not forgot using 'app.use(express.json());' up)
 app.post('/api/rooms', (req, res) => {
+    //Validation for unique room
+    for (let room of rooms) {
+        if (room.name === req.body.name) {
+          res.status(409).send("Roomname is already taken! Try again.");
+          return;
+        }
+    }
     // Validate, if invalid return 400 - Bad request
     if (!req.body.name)
         return res.status(400).send('Name is required')
@@ -103,10 +110,7 @@ io.sockets.on('connection', function (socket) {
             updateUsernames();
         }
 
-
-
-        //socket.username = username;
-
+        //Room
         socket.room = rooms[0].name; //Connect to default First room
         console.log('socket room: ', socket.room);
         socket.join(socket.room);

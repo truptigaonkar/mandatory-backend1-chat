@@ -84,24 +84,24 @@ $(function () {
             if (value == current_room) {
                 //Listing rooms with delete button
                 $("#rooms").append('<ul class="list-group">' +
-                                '<li class="id list-group-item">' + value.id +
-                                ' ' + value.name +
-                                ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
-                                'X' +
-                                '</button>' +
-                                '</li>') +
-                            '</ul>';
+                    '<li class="id list-group-item">' + value.id +
+                    ' ' + value.name +
+                    ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
+                    'X' +
+                    '</button>' +
+                    '</li>') +
+                    '</ul>';
             }
             else {
                 //After switching room
                 $("#rooms").append('<ul class="list-group">' +
-                                '<li class="id list-group-item"><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.id +
-                                ' ' + value.name +
-                                ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
-                                'X' +
-                                '</button>' +
-                                '</a></li>') +
-                            '</ul>';
+                    '<li class="id list-group-item"><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.id +
+                    ' ' + value.name +
+                    ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
+                    'X' +
+                    '</button>' +
+                    '</a></li>') +
+                    '</ul>';
             }
         });
     });
