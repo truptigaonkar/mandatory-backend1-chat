@@ -1,12 +1,12 @@
-    let socket = io.connect();
-    let $messageForm = $('#messageForm');
-    let $messageInput = $('#messageInput');
-    let $chatWindow = $('#chatWindow');
-    let $users = $('#users');
+let socket = io.connect();
+let $messageForm = $('#messageForm');
+let $messageInput = $('#messageInput');
+let $chatWindow = $('#chatWindow');
+let $users = $('#users');
 
-    let $usernameForm = $('#usernameForm');
-    let $usernameInput = $('#usernameInput');
-    let $usernameError = $('#usernameError');
+let $usernameForm = $('#usernameForm');
+let $usernameInput = $('#usernameInput');
+let $usernameError = $('#usernameError');
 
 $(function () {
     // Username form submit function
@@ -82,13 +82,37 @@ $(function () {
         $('#rooms').empty();
         $.each(rooms, function (key, value) {
             if (value == current_room) {
-                $('#rooms').append('<div>' + value.name + '</div>');
+                //Listing rooms with delete button
+                $("#rooms").append('<ul class="list-group">' +
+                                '<li class="id list-group-item">' + value.id +
+                                ' ' + value.name +
+                                ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
+                                'X' +
+                                '</button>' +
+                                '</li>') +
+                            '</ul>';
             }
             else {
-                $('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.name + '</a></div>');    
+                //After switching room
+                $("#rooms").append('<ul class="list-group">' +
+                                '<li class="id list-group-item"><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.id +
+                                ' ' + value.name +
+                                ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
+                                'X' +
+                                '</button>' +
+                                '</a></li>') +
+                            '</ul>';
             }
         });
     });
+
+    // socket.on('updateroomusers', function(roomusers) {
+    //     $("#roomusers").empty();
+    //     $.each(roomusers, function (key, value) {
+    //         $('#roomusers').append('<div>' + value.username + '</div>');
+    //     });
+    //     });
+
 });
 
 function switchRoom(room) {

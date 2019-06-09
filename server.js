@@ -25,7 +25,7 @@ usernames = [];
 // ]
 
 //Get all rooms
-app.get('/api/rooms', function(req, res){
+app.get('/api/rooms', function (req, res) {
     res.send(rooms);
 });
 
@@ -33,7 +33,7 @@ app.get('/api/rooms', function(req, res){
 app.get('/api/rooms/:id', (req, res) => {
     // Look up the room if no exist, return 404
     const room = rooms.find(c => c.id === parseInt(req.params.id));
-    if(!room) 
+    if (!room)
         return res.status(404).send('The room with specific id is not found');
     // Return the same room
     res.send(room);
@@ -42,7 +42,7 @@ app.get('/api/rooms/:id', (req, res) => {
 // POST room (Do not forgot using 'app.use(express.json());' up)
 app.post('/api/rooms', (req, res) => {
     // Validate, if invalid return 400 - Bad request
-    if(!req.body.name)
+    if (!req.body.name)
         return res.status(400).send('Name is required')
     // room to be added
     const room = {
@@ -53,32 +53,32 @@ app.post('/api/rooms', (req, res) => {
     rooms.push(room);
     // Return the added room
     res.send(room)
-    
+
     // Fs module
     let data = JSON.stringify(rooms);
     fs.writeFile('rooms.json', data, finished);
-    function finished(err){
+    function finished(err) {
         console.log('all set')
     }
-    
+
 });
 
 // DELETE room
 app.delete('/api/rooms/:id', (req, res) => {
     // Look up the room if no exist, return 404
     const room = rooms.find(c => c.id === parseInt(req.params.id));
-    if(!room)
+    if (!room)
         return res.status(404).send('The room with specific id is not found');
     // Delete
     const index = rooms.indexOf(room);
     rooms.splice(index, 1);
     // Return the deleted room
     res.send(room);
-    
+
     // Fs module
     let data = JSON.stringify(rooms);
     fs.writeFile('rooms.json', data, finished);
-    function finished(err){
+    function finished(err) {
         console.log('all set')
     }
 
@@ -103,6 +103,8 @@ io.sockets.on('connection', function (socket) {
             updateUsernames();
         }
 
+
+
         //socket.username = username;
 
         socket.room = rooms[0].name; //Connect to default First room
@@ -110,23 +112,32 @@ io.sockets.on('connection', function (socket) {
         socket.join(socket.room);
 
         // Admin welcome message to everyone at the start
-        socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' +socket.room);
-      
-		socket.emit('updaterooms', rooms, socket.room);
-    
+        socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' + socket.room);
+
+        socket.emit('updaterooms', rooms, socket.room);
+
+        //         // get all the clients in ‘room1′
+        // var clients = io.sockets.clients(socket.room);
+        // // loop through clients in ‘room1′ and add their usernames to the roomusers array
+        // for(var i = 0; i < clients.length; i++) {
+        // roomusers[roomusers.length] = clients[i].username;
+        // }
+        // // broadcast to everyone in room 1 the usernames of the clients connected.
+        // io.sockets.to(socket.room).emit('updateroomusers',roomusers);
+
     });
 
-    socket.on('switchRoom', function(newroom){
-		socket.leave(socket.room);
-		socket.join(newroom);
-		socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' +newroom);
-		// sent message to OLD room
-		socket.broadcast.to(socket.room).emit('updatechat', 'Admin', socket.username+' has left this room');
-		// update socket session room title
-		socket.room = newroom;
-		socket.broadcast.to(newroom).emit('updatechat', 'Admin', socket.username+' has joined this room');
-		socket.emit('updaterooms', rooms, newroom);
-	});
+    socket.on('switchRoom', function (newroom) {
+        socket.leave(socket.room);
+        socket.join(newroom);
+        socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' + newroom);
+        // sent message to OLD room
+        socket.broadcast.to(socket.room).emit('updatechat', 'Admin', socket.username + ' has left this room');
+        // update socket session room title
+        socket.room = newroom;
+        socket.broadcast.to(newroom).emit('updatechat', 'Admin', socket.username + ' has joined this room');
+        socket.emit('updaterooms', rooms, newroom);
+    });
 
     // Update Usernames
     function updateUsernames() {
