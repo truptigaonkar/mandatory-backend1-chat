@@ -70,3 +70,8 @@ li {
 button{
     padding: 1px;
 }
+
+ /* #rooms ul.list-group li:first-child{
+    pointer-events:none; 
+    opacity:0.6;
+ } */

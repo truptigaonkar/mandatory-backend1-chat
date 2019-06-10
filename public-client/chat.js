@@ -44,7 +44,7 @@ $(function () {
     socket.on('usernames', function (data) {
         let html = '';
         for (i = 0; i < data.length; i++) {
-            html += data[i] + '<hr>';
+            html += '<div class="list-group-item list-group-item-action list-group-item-success">' + data[i] + '</div>';
         }
         $users.html(html);
     });
@@ -69,12 +69,12 @@ $(function () {
 
     // Receive chat message from server.
     socket.on('new message', function (data) {
-        $chatWindow.append("<strong>" + data.user + " : </strong>" + data.msg + "<br />"); // Display the message on chatwindow
+        $chatWindow.append('<div class="alert alert-success" role="alert">' + '<b style="color:darkblue">' + data.user + " : </b>" + data.msg + '</div>'); // Display the message on chatwindow
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
     socket.on('updatechat', function (username, data) {
-        $('#chatWindow').append('<b>' + username + ':</b> ' + data + '<br>');
+        $('#chatWindow').append('<div class="alert alert-warning" role="alert">' + '<b style="color: darkblue">' + username + ':</b> ' + data +'</div>');
     });
 
     // listener, whenever the server emits 'updaterooms', this updates the room the client is in
@@ -84,7 +84,7 @@ $(function () {
             if (value == current_room) {
                 //Listing rooms with delete button
                 $("#rooms").append('<ul class="list-group">' +
-                    '<li class="id list-group-item">' + value.id +
+                    '<li class="id list-group-item list-group-item-action list-group-item-primary">' + value.id +
                     ' ' + value.name +
                     ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
                     'X' +
@@ -95,12 +95,12 @@ $(function () {
             else {
                 //After switching room
                 $("#rooms").append('<ul class="list-group">' +
-                    '<li class="id list-group-item"><a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.id +
-                    ' ' + value.name +
+                    '<li class="id list-group-item list-group-item-action list-group-item-primary">' + value.id +
+                    ' ' + '<a href="#" onclick="switchRoom(\'' + value.name + '\')">' + value.name + '</a>' +
                     ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
                     'X' +
                     '</button>' +
-                    '</a></li>') +
+                    '</li>') +
                     '</ul>';
             }
         });

@@ -116,7 +116,8 @@ io.sockets.on('connection', function (socket) {
         socket.join(socket.room);
 
         // Admin welcome message to everyone at the start
-        socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' + socket.room);
+        socket.emit('updatechat', 'Admin', '<b style="color:green">' + socket.username + '</b>' +' has connected to room ' + '<b style="color:blue">' + socket.room+ '</b>');
+        //socket.emit('updatechat', 'Admin', socket.username + ' has connected to room ' + '<b style="color:blue">' +newroom + '</b>');
 
         socket.emit('updaterooms', rooms, socket.room);
 
@@ -134,7 +135,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('switchRoom', function (newroom) {
         socket.leave(socket.room);
         socket.join(newroom);
-        socket.emit('updatechat', 'Admin', socket.username + ' has connected to ' + newroom);
+        socket.emit('updatechat', 'Admin', '<b style="color:green">' + socket.username + '</b>' + ' has connected to room ' + '<b style="color:blue">' +newroom + '</b>');
         // sent message to OLD room
         socket.broadcast.to(socket.room).emit('updatechat', 'Admin', socket.username + ' has left this room');
         // update socket session room title

@@ -8,7 +8,7 @@
     <title>Realtime chat</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script> 
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
@@ -46,12 +46,13 @@
                     Rooms
                     <form action="" type="submit" id="createRoomForm">
                         <input type="text" class="form-control form-control-sm" id="roomInput"
-                            placeholder="Create new room">
+                            placeholder="Create New Room">
                     </form>
                 </div>
                 <div class="card-body" style="overflow-y: scroll; ">
+                    <div id="messageBox"></div>
                     <div id="rooms">
-                        <div id="roomError"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -74,7 +75,7 @@
             <div class="card" id="userWrapper">
                 <div class="card-header" style="text-align: center; font-weight: bold">Users</div>
                 <div class="card-body" style="overflow-y: scroll; ">
-                    <div id="users"></div>
+                    <div id="users" style="color: blueviolet"></div>
                 </div>
             </div>
         </div>
@@ -98,20 +99,17 @@
                     success: function (data, response) {
                         console.log(response);
                         roomInput.val('');
-                        //if (roomInput.val()){
                         $("#rooms").append('<ul class="list-group">' +
-                                '<li class="id list-group-item"><a href="#" onclick="switchRoom(\'' + data.name + '\')">  ' + data.id +
-                                ' ' + data.name +
+                                '<li class="id list-group-item list-group-item-action list-group-item-primary">' + data.id +
+                                ' ' + '<a href="#" onclick="switchRoom(\'' + data.name +
+                                '\')"> ' + data.name + '</a>' +
                                 ' ' + '<button class="btnDelete btn btn-danger btn-xs">' +
                                 'X' +
                                 '</button>' +
-                                '</a></li>') +
+                                '</li>') +
                             '</ul>';
-                        // }else{
-                        //     $("#rooms").html('unique room name')
-                        // }
+                            $("#messageBox").html('<div class="alert alert-success" role="alert">' + data.name + ' Created!' + '</div>');
                     },
-
                 });
             });
 
@@ -126,11 +124,12 @@
                     contentType: 'application/json',
                     success: function (response) {
                         console.log(response);
-                        //$("#rooms").find('<li class="id list-group-item">').remove();
-                        //$("#rooms").find('li .id list-group-item').remove();
+                        $("#messageBox").html('<div class="alert alert-success" role="success">' + response.name + ' Deleted! Refresh' + '</div>');
+                        //$("#rooms").find('li .id list-group-item' +id).remove();
+                        //$(this).closest("li" +id).fadeOut();
                     }
                 });
-                window.location.replace('/')
+                //window.location.replace('/')
             });
 
 
