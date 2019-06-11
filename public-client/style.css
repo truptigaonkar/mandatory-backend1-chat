@@ -1,11 +1,16 @@
 * {
     font-family: 'ZCOOL KuaiLe', cursive;
+    /* background-color: #fff5f5; */
 }
 
 body {
     padding: 0;
     margin: 0;
     height: 100%;
+
+    background: no-repeat center center fixed;
+  background-image: url(./image3.png);
+  background-size: cover;
 }
 
 #container {
@@ -67,11 +72,11 @@ li {
     width: 0px;
 }
 
-button{
+button {
     padding: 1px;
 }
 
- /* #rooms ul.list-group li:first-child{
+/* #rooms ul.list-group li:first-child{
     pointer-events:none; 
     opacity:0.6;
  } */
