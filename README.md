@@ -1,5 +1,5 @@
 ## Real Time Chat Application - Backend - Express, Node, Socket - [Live Demo]( http://immense-inlet-98375.herokuapp.com/)
-Real time chat application using Backend - Express, Node & Socket.io
+![mandatory-backend1-chat](https://user-images.githubusercontent.com/14937374/79725669-dc1b7800-82e9-11ea-9ca2-e14768483d55.gif)
 #### Technologies
 * Node
 * JavaScript, JQuery
