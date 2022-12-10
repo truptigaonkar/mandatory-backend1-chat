@@ -18,7 +18,7 @@
   "homepage": "https://github.com/truptigaonkar/mandatory-backend1-chat#readme",
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "socket.io": "^2.2.0"
   }
 }
